@@ -26,4 +26,7 @@
 //  Returns the amount of columns that have to display at that moment
 -(NSUInteger)numberOfColumnsInCollectionView:(UICollectionView *)collectionView;
 
+// Returns spacing between cells
+-(float)spacingBetweenCellsInCollectionView:(UICollectionView *)collectionView;
+
 @end

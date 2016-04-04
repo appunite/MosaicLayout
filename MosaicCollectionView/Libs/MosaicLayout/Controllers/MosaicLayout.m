@@ -74,8 +74,13 @@
 
 -(float)columnWidth{
     float retVal = self.collectionView.bounds.size.width / self.columnsQuantity;
+    retVal -= [self cellsSpacing];
     retVal = roundf(retVal);
     return retVal;
+}
+
+-(float)cellsSpacing {
+    return [self.delegate spacingBetweenCellsInCollectionView:self.collectionView];
 }
 
 #pragma mark UICollectionViewLayout
@@ -97,9 +102,8 @@
         
         //  Get x, y, width and height for indexPath
         NSUInteger columnIndex = [self shortestColumnIndex];
-        NSUInteger xOffset = columnIndex * [self columnWidth];
-        NSUInteger yOffset = [[_columns objectAtIndex:columnIndex] integerValue];
-
+        NSUInteger xOffset = columnIndex * ([self columnWidth] + [self cellsSpacing]);
+        NSUInteger yOffset = [[_columns objectAtIndex:columnIndex] integerValue] + [self cellsSpacing];
         NSUInteger itemWidth = 0;
         NSUInteger itemHeight = 0;
         float itemRelativeHeight = [self.delegate collectionView:self.collectionView relativeHeightForItemAtIndexPath:indexPath];
@@ -107,9 +111,9 @@
         if ([self canUseDoubleColumnOnIndex:columnIndex] &&
             [self.delegate collectionView:self.collectionView isDoubleColumnAtIndexPath:indexPath]){
             
-            itemWidth = [self columnWidth] * 2;
+            itemWidth = [self columnWidth] * 2 + [self cellsSpacing];
             itemHeight = itemRelativeHeight * itemWidth;
-            itemHeight = itemHeight - (itemHeight % kHeightModule);            
+//            itemHeight = itemHeight - (itemHeight % kHeightModule);            
             
             //  Set column height
             _columns[columnIndex] = @(yOffset + itemHeight);
@@ -118,7 +122,7 @@
         }else{
             itemWidth = [self columnWidth];
             itemHeight = itemRelativeHeight * itemWidth;
-            itemHeight = itemHeight - (itemHeight % kHeightModule);            
+//            itemHeight = itemHeight - (itemHeight % kHeightModule);            
             
             //  Set column height
             _columns[columnIndex] = @(yOffset + itemHeight);
