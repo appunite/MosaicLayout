@@ -73,8 +73,7 @@
 #pragma mark - Public
 
 -(float)columnWidth{
-    float retVal = self.collectionView.bounds.size.width / self.columnsQuantity;
-    retVal -= [self cellsSpacing];
+    float retVal = (self.collectionView.bounds.size.width - (self.columnsQuantity-1) * [self cellsSpacing]) / self.columnsQuantity;
     retVal = roundf(retVal);
     return retVal;
 }
@@ -120,7 +119,7 @@
             [self.delegate collectionView:self.collectionView isDoubleColumnAtIndexPath:indexPath]){
             
             itemWidth = [self columnWidth] * 2 + [self cellsSpacing];
-            itemHeight = itemRelativeHeight * itemWidth;
+            itemHeight = itemRelativeHeight * [self columnWidth] * 2 + [self cellsSpacing];
 //            itemHeight = itemHeight - (itemHeight % kHeightModule);            
             
             //  Set column height
