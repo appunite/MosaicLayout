@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MosaicLayout"
-  s.version          = "0.0.1"
+  s.version          = "0.0.2"
   s.summary          = "A layout very similar to MosaicUI that uses Lightbox algorithm described in @vjeux's blog and takes advantage of UICollectionView."
   s.description      = <<-DESC
                        A layout very similar to MosaicUI that uses Lightbox algorithm described in @vjeux's blog and takes advantage of UICollectionView.
