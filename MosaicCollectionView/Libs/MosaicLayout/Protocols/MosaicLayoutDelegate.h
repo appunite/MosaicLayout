@@ -29,4 +29,7 @@
 // Returns spacing between cells
 -(float)spacingBetweenCellsInCollectionView:(UICollectionView *)collectionView;
 
+@optional
+-(float)heightOfHeaderForCollectionView:(UICollectionView *)collectionView;
+
 @end

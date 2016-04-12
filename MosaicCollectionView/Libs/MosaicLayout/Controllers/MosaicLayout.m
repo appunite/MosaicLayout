@@ -89,13 +89,21 @@
     
     //  Set all column heights to 0
     _columns = [NSMutableArray arrayWithCapacity:self.columnsQuantity];
+    float initialPosition = 0;
+    if ([self.delegate respondsToSelector:@selector(heightOfHeaderForCollectionView:)]) {
+        initialPosition = [self.delegate heightOfHeaderForCollectionView:self.collectionView];
+    }
     for (NSInteger i = 0; i < self.columnsQuantity; i++) {
-        [_columns addObject:@(0)];
+        [_columns addObject:@(initialPosition)];
     }
     
     //  Get all the items available for the section
     NSUInteger itemsCount = [[self collectionView] numberOfItemsInSection:0];
-    _itemsAttributes = [NSMutableArray arrayWithCapacity:itemsCount];
+    _itemsAttributes = [NSMutableArray arrayWithCapacity:itemsCount+1];
+    
+    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    attributes.frame = CGRectMake(0, 0, self.collectionView.bounds.size.width, 250);
+    [_itemsAttributes addObject:attributes];
     
     for (NSUInteger i = 0; i < itemsCount; i++){
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
@@ -161,4 +169,7 @@
     return retVal;
 }
 
+- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    return [_itemsAttributes objectAtIndex:indexPath.row];
+}
 @end
