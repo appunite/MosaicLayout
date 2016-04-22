@@ -110,7 +110,7 @@
         //  Get x, y, width and height for indexPath
         NSUInteger columnIndex = [self shortestColumnIndex];
         NSUInteger xOffset = columnIndex * ([self columnWidth] + [self cellsSpacing]);
-        NSUInteger yOffset = [[_columns objectAtIndex:columnIndex] integerValue] + [self cellsSpacing];
+        NSUInteger yOffset = [[_columns objectAtIndex:columnIndex] integerValue] ;
         NSUInteger itemWidth = 0;
         NSUInteger itemHeight = 0;
         float itemRelativeHeight = [self.delegate collectionView:self.collectionView relativeHeightForItemAtIndexPath:indexPath];
@@ -123,8 +123,8 @@
 //            itemHeight = itemHeight - (itemHeight % kHeightModule);            
             
             //  Set column height
-            _columns[columnIndex] = @(yOffset + itemHeight);
-            _columns[columnIndex+1] = @(yOffset + itemHeight);
+            _columns[columnIndex] = @(yOffset + itemHeight + [self cellsSpacing]);
+            _columns[columnIndex+1] = @(yOffset + itemHeight + [self cellsSpacing]);
 
         }else{
             itemWidth = [self columnWidth];
@@ -132,7 +132,7 @@
 //            itemHeight = itemHeight - (itemHeight % kHeightModule);            
             
             //  Set column height
-            _columns[columnIndex] = @(yOffset + itemHeight);
+            _columns[columnIndex] = @(yOffset + itemHeight + [self cellsSpacing]);
         }
         
         /*  Assign all those values to an UICollectionViewLayoutAttributes instance
