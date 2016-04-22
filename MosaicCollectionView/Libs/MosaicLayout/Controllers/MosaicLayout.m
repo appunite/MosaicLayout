@@ -3,6 +3,7 @@
 //  MosaicCollectionView
 //
 //  Created by Ezequiel A Becerra on 2/16/13.
+//  Changed by Przemek Cholewa in 2016
 //  Copyright (c) 2013 Betzerra. All rights reserved.
 //
 
