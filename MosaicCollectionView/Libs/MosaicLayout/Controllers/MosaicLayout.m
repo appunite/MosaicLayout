@@ -121,7 +121,6 @@
             
             itemWidth = [self columnWidth] * 2 + [self cellsSpacing];
             itemHeight = itemRelativeHeight * [self columnWidth] * 2 + [self cellsSpacing];
-//            itemHeight = itemHeight - (itemHeight % kHeightModule);            
             
             //  Set column height
             _columns[columnIndex] = @(yOffset + itemHeight + [self cellsSpacing]);
