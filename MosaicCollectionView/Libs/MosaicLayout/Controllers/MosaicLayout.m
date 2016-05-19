@@ -86,7 +86,8 @@
 #pragma mark UICollectionViewLayout
 
 -(void)prepareLayout{
-    
+    if (![self.collectionView numberOfSections]) return;
+	
     //  Set all column heights to 0
     _columns = [NSMutableArray arrayWithCapacity:self.columnsQuantity];
     float initialPosition = 0;
